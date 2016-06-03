@@ -1,0 +1,91 @@
+% \documentclass[journal,compsoc]{IEEEtran}\newcommand{\journal}{true}
+\documentclass[conference]{IEEEtran}\newcommand{\journal}{false}
+% \documentclass[12pt,openright,twoside,a4paper,english,french,spanish]{abntex2}
+% \documentclass[a4paper,14pt]{report}
+% \documentclass[a4paper]{coursepaper}
+% \documentclass[12pt,answers]{exam}
+% \documentclass[a4paper,11pt]{article}
+% \documentclass[a4paper,11pt]{book}
+% \documentclass[paper=256mm:192mm,fontsize=20pt,pagesize,parskip=half-]{scrartcl} %deprected
+\input packages
+
+\input nomes
+\input setup
+\hyphenation{MAT-LAB}
+
+\begin{document}
+
+\makeatletter
+% \@ifclassloaded{IEEEtran}{}
+\makeatother
+
+\onecolumn    %Conferir se pode ser feito em duas colunas
+% \imprimeabstract %Dependendo do modelo, tem que ficar antes ou depois de \maketitle
+\maketitle
+% \input capa       %exemplo de personalização de capa/titulo
+% \imprimeabstract %Dependendo do modelo, tem que ficar antes ou depois de \maketitle
+
+
+
+%\pagestyle{myheadings}
+\setcounter{page}{1}
+\pagenumbering{roman}
+
+  \selectlanguage{brazil}   %voltando para o português.
+  % \input{conteudo/historico}  \newpage
+  %\tableofcontents     % Sumario
+  %\listoffigures
+  %\listoftables
+  %\lstlistoflistings
+
+%\newpage
+
+
+\setcounter{page}{1}
+\pagenumbering{arabic}
+% \thispagestyle{empty}
+% \IEEEdisplaynotcompsoctitleabstractindextext
+% \IEEEpeerreviewmaketitle
+  
+%\onecolumn   %Para texto em uma coluna
+%\twocolumn   %Para texto em duas colunas
+\begin{multicols}{2} % Insira dentro das {}  aquantidade de colunas desejadas
+%\begin{alphasection}
+  \input conteudo/conteudo
+  \rowcolors{0}{white}{white}
+%\end{alphasection}
+\end{multicols}
+%\onecolumn
+%\printglossaries
+%\glsdescwidth
+
+
+%%% Para textos em paralelo, utiilize:
+
+% \begin{Parallel}{7cm}{7cm}
+%   \ParallelRText{Texto 1}
+%   \ParallelLText{Texto 2}
+% \end{Parallel}
+
+
+% \glossarystyle{altlist}
+% \providetranslation{Notation (glossaries)}{Notação}
+% \providetranslation{Description (glossaries)}{Descrição}
+% \phantomsection
+% \addcontentsline{toc}{chapter}{Gloss\'ario\label{glossary}}
+% % \setlength{\glsdescwidth}{0.48\textwidth}%
+% \printglossary[title=Gloss\'ario]
+% % \newpage
+% \phantomsection
+% \addcontentsline{toc}{chapter}{Lista de Termos}\label{acrom}
+% \printglossary[type=\acronymtype,title=Lista de Termos,toctitle=Lista de Termos]
+
+
+% \glsaddall
+
+
+  \bibliographystyle{abnt-num}%{IEEEtran}%{abnt-num}%{ieeetr}%{abnt-alf}
+  \bibliography{bibliography}   % expects file "bibliography.bib" 
+  \nocite{*}  % imprime TODAS as referencias
+
+\end{document}
