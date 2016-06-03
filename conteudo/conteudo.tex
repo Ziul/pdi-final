@@ -6,7 +6,7 @@ Este trabalho foi implementado majoritariamente com linguagem \textbf{Python} po
 A codificação do dado ocorre, tendo como base os símbolos e o intervalo de cada um deles. Este intervalo é definido com base na probabilidade de cada símbolo. Tendo essa probabilidade já definida, monta-se uma tabela com o seguinte formato:
 
 \begin{center}
-{\ttfamily
+{\ttfamily\footnotesize
     MAP[símbolo] = [probabilidade]\\
     MAP[símbolo] = [intervalo\_inferior, intervalo\_superior]
 }
@@ -23,22 +23,27 @@ Análogo a codificação, a decodificação necessita do código a ser decodific
 \section*{Performance} % (fold)
 \label{sub:performance}
 
-% \begin{table}[htbp]
-% \centering
-% \caption{}
-% \begin{longtable}{|c|p{2cm}|c|c|}
-% \hline
-% \textbf{Entrada} & \textbf{tipo} & \textbf{tamanho} & \textbf{tempo[s]} \\ \hline
-% “main.tex” & texto & 8 bytes & 1.377 \\ \hline
-% {\ttfamily README.md} & arquivo de texto & 269 bytes & 1.392 \\ \hline
-% {\ttfamily resumo.pdf} & texto + binário & 116 bytes & 1.402 \\ \hline
-% {\ttfamily fga.jpg} & imagem & 45 Kbytes & 1.421 \\ \hline
-% {\ttfamily file.log} & texto & 852 bytes & 1.442 \\ \hline
-% {\ttfamily lena.jpg} & imagem & 1.2 Mb & 2.179 \\ \hline
-% {\ttfamily livro.pdf} & texto + binário & 18 Mb & 13.065 \\ \hline
-% \end{longtable}
+\end{multicols}
+\begin{table}[htbp]
+\centering
+\caption{}
+% \resizebox{0.9\columnwidth}{!}{%
+\begin{tabular}{|c|p{2.5cm}|c|c|}
+\hline
+\textbf{Entrada} & \textbf{tipo} & \textbf{tamanho} & \textbf{tempo[s]} \\ \hline
+“main.tex” & texto & 8 bytes & 1.377 \\ \hline
+{\ttfamily README.md} & arquivo de texto & 269 bytes & 1.392 \\ \hline
+{\ttfamily resumo.pdf} & texto + binário & 116 bytes & 1.402 \\ \hline
+{\ttfamily fga.jpg} & imagem & 45 Kbytes & 1.421 \\ \hline
+{\ttfamily file.log} & texto & 852 bytes & 1.442 \\ \hline
+{\ttfamily lena.jpg} & imagem & 1.2 Mb & 2.179 \\ \hline
+{\ttfamily livro.pdf} & texto + binário & 18 Mb & 13.065 \\ \hline
+\end{tabular}
+% }
 \label{}
-% \end{table}
+\end{table}
+
+\begin{multicols*}{2}
 
 % section performance (end)
 
