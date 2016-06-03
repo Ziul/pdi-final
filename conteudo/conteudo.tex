@@ -1,91 +1,20 @@
-Este trabalho foi implementado majoritariamente com linguagem \textbf{Python} por oferecer facilidade em prototipagem de software e uma vasta gama de bibliotecas para auxilio de estruturas de dados, porém um \textit{bind} com MATLAB esta sendo oferecido.
 
-\section*{Codificação} % (fold)
-\label{sub:codificação}
+\section*{descrição do problema}
 
-A codificação do dado ocorre, tendo como base os símbolos e o intervalo de cada um deles. Este intervalo é definido com base na probabilidade de cada símbolo. Tendo essa probabilidade já definida, monta-se uma tabela com o seguinte formato:
+\lipsum[1]
 
-\begin{center}
-{\ttfamily\footnotesize
-    MAP[símbolo] = [probabilidade]\\
-    MAP[símbolo] = [intervalo\_inferior, intervalo\_superior]
-}
-\end{center}
+\section*{estado da arte}
 
-A sequencia de símbolos a ser codificada, junto com a tabela de intervalos é então passada para o método {\ttfamily encode}, o qual retorna o número codificado. Atualmente esse resultado esta limitado à 64 bits.
-% section codificação (end)
+\lipsum[2]
 
-\section*{Decodificação} % (fold)
-\label{sub:decodificação}
-Análogo a codificação, a decodificação necessita do código a ser decodificado e da tabela com o intervalo de valores. Novamente, essa tabela pode ser construída apenas com a probabilidade de cada símbolo. Com ambas as informações, basta fazer a chamada do método {\ttfamily decode} passando como parâmetro o código e a tabela. Como resposta, o método retorna a sequencia de símbolos a qual o código representa com aquela tabela de probabilidade.
-% section decodificação (end)
+\section*{abordagem escolhida}
 
-\section*{Performance} % (fold)
-\label{sub:performance}
+\lipsum[3]
 
-\end{multicols}
-\begin{table}[htbp]
-\centering
-\caption{}
-% \resizebox{0.9\columnwidth}{!}{%
-\begin{tabular}{|c|p{2.5cm}|c|c|}
-\hline
-\textbf{Entrada} & \textbf{tipo} & \textbf{tamanho} & \textbf{tempo[s]} \\ \hline
-“main.tex” & texto & 8 bytes & 1.377 \\ \hline
-{\ttfamily README.md} & arquivo de texto & 269 bytes & 1.392 \\ \hline
-{\ttfamily resumo.pdf} & texto + binário & 116 bytes & 1.402 \\ \hline
-{\ttfamily fga.jpg} & imagem & 45 Kbytes & 1.421 \\ \hline
-{\ttfamily file.log} & texto & 852 bytes & 1.442 \\ \hline
-{\ttfamily lena.jpg} & imagem & 1.2 Mb & 2.179 \\ \hline
-{\ttfamily livro.pdf} & texto + binário & 18 Mb & 13.065 \\ \hline
-\end{tabular}
-% }
-\label{}
-\end{table}
+\section*{resultados e simulações}
 
-\begin{multicols*}{2}
+\lipsum[4]
 
-% section performance (end)
+\section*{conclusões e trabalhos futuros}
 
-\section*{Bind de Python com MATLAB} % (fold)
-\label{sec:bind_com_matlab}
-
-O bind de Python com MATLAB esta disponível para as versões do MATLAB R2014B\footnote{Informações segundo \url{http://www.mathworks.com/help/matlab/matlab_external/system-and-configuration-requirements.html}.} em diante. Um exemplo do uso do \textit{bind} pode ser observado no \autoref{encoding}.
-
-\begin{lstlisting}[language=MATLAB,numbers=none,basicstyle=\footnotesize,label=encoding,caption={Chamada de funções python no MATLAB}]
-% clear classes, scripts, etc
-clear classes;
-
-% Import module
-mod = py.importlib.import_module('arithmetic');
-
-% Some source and code example
-source_code = 'arithmetic';
-code = 0.0757451536000
-
-% Setup the probabilities and the rage for each symbol
-probabilities = py.arithmetic.set_probability(source_code);
-symbols_with_range = py.arithmetic.set_range(probabilities);
-
-% Encoding
-result = py.arithmetic.encode(source_code, probabilities);
-
-% Decoding
-result = py.arithmetic.encode(code, probabilities);
-\end{lstlisting}
-
-% section bind_com_matlab (end)
-
-\section*{Problemas e dificuldades} % (fold)
-\label{sec:problemas_e_dificuldades}
-
-Um dos maiores problemas é o armazenamento e leitura do número codificado. Devido a arquitetura ter uma limitação de 64 bit, as linguagens tem por natureza a escrita limitada a este tamanho também, sendo necessário a escrita em bits diretamente. Todavia este é um número flutuante, e não um inteiro, fazendo seu conteúdo mais complexo de ser gerenciado.
-
-Outro grande problema é o controle de operações com ponto flutuante, visto que perdas e arredondamento são comuns quando o número é menor que o ponto de arredondamento. Para contornar este problema, uma biblioteca externa dedicada a evitar estes problema esta sendo utilizada.
-
-% section problemas_e_dificuldades (end)
-
-\section*{Disponibilidade} % (fold)
-\label{sec:disponibilidade}
-O código na integra pode ser obtido em \url{https://github.com/Ziul/arithmetic_coding}. A \textit{branch} {\ttfamily master} contém a biblioteca em Python, enquanto a \textit{branch} {\ttfamily Matlab} contem um exemplo de uso com o MATLAB.
-% section disponibilidade (end)
+\lipsum[5]
