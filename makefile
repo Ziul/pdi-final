@@ -9,7 +9,7 @@ all: clean optimize
 
 update:
 	# input_name:= atualizacao
-	@make input_name=atualizacao
+	@make input_name=atualizacao output_name="Atualizacao_Trabalho_Final.pdf"
 
 history:
 	./latex-git-log --author --width=5 > ./conteudo/commit_log.tex
