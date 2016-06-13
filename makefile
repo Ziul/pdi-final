@@ -7,6 +7,10 @@ input_name = main
 
 all: clean optimize
 
+update:
+	# input_name:= atualizacao
+	@make input_name=atualizacao
+
 history:
 	./latex-git-log --author --width=5 > ./conteudo/commit_log.tex
 

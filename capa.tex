@@ -1,36 +1,48 @@
-%	Este arquivo não esta oroginalmente incluso e representa apenas um
-%	breve modelo de como se produzir uma capa personalizada
+% %	Este arquivo não esta oroginalmente incluso e representa apenas um
+% %	breve modelo de como se produzir uma capa personalizada
 
-\begin{titlepage}
-\centering
-% \doublespacing
-\scshape
-\normalfont
-\vspace{0.1\textheight}
-\vbox{\normalfont{UNB - UNIVERSIDADE DE BRASILIA\\CAMPUS GAMA}}
-\vspace{0.1\textheight}
+% \begin{titlepage}
+% \centering
+% % \doublespacing
+% \scshape
+% \normalfont
+% \vspace{0.1\textheight}
+% \vbox{\normalfont{UNB - UNIVERSIDADE DE BRASILIA\\CAMPUS DARCY RIBEIRO}}
+% \vspace{0.1\textheight}
 
 
-\vbox{\Huge
-%Nome do Trabalho
+% \vbox{\Huge
+% %Nome do Trabalho
 
-\ver
+% \ver
 
-\vspace{0.03\textheight}
-\hrule }
+% \vspace{0.03\textheight}
+% \hrule }
 
-\vbox{
-%Nome da Matéria
+% \vbox{
+% %Nome da Matéria
 
-\hell
+% \hell
 
-}
-\vspace{0.3\textheight}
+% }
+% \vspace{0.3\textheight}
 
-%teste
+% %teste
 
-\vspace{0.3\textheight}
-%Nomes
-\vbox{\scshape
-{\names}}
-\end{titlepage}
+% \vspace{0.3\textheight}
+% %Nomes
+% \vbox{\scshape
+% {\names}}
+% \end{titlepage}
+
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+\textbf{\class} &&\\ 
+\textbf{\examnum} & \textbf{Nome: }\name &\\
+\textbf{\examdate} &\textbf{Matricula:} \luizmatricula &
+\end{tabular*}\\
+\rule[2ex]{\textwidth}{2pt}
+%redefinição da saida para respostas
+\renewcommand{\solutiontitle}{\noindent\textbf{Resposta:}\par\noindent}
+\printanswers %apresentar respostas
+%\addpoints % points count
+\noaddpoints % to omit double points count
