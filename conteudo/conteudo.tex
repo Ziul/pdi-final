@@ -10,6 +10,7 @@ Um dos processos de identificação mais utilizados pelos seres humanos é o rec
 
 O reconhecimento facial é extremamente complexo de implementar em uma máquina, visto não sabermos ao certo como o cérebro humano realiza essa tarefa. O cérebro humano pode identificar corretamente uma pessoa a partir de sua imagem facial mesmo sobre as mais diversas condições, como variações de iluminação, observando apenas uma de suas características ou partes, e até mesmo com distorções ou deformações.
 
+% http://docs.opencv.org/2.4/modules/contrib/doc/facerec/facerec_tutorial.html
 % Face recognition based on the geometric features of a face is probably the most intuitive approach to face recognition. One of the first automated face recognition systems was described in [Kanade73]: marker points (position of eyes, ears, nose, ...) were used to build a feature vector (distance between the points, angle between them, ...). The recognition was performed by calculating the euclidean distance between feature vectors of a probe and reference image. Such a method is robust against changes in illumination by its nature, but has a huge drawback: the accurate registration of the marker points is complicated, even with state of the art algorithms. Some of the latest work on geometric face recognition was carried out in [Bru92]. A 22-dimensional feature vector was used and experiments on large datasets have shown, that geometrical features alone my not carry enough information for face recognition.
 
 % The Eigenfaces method described in [TP91] took a holistic approach to face recognition: A facial image is a point from a high-dimensional image space and a lower-dimensional representation is found, where classification becomes easy. The lower-dimensional subspace is found with Principal Component Analysis, which identifies the axes with maximum variance. While this kind of transformation is optimal from a reconstruction standpoint, it doesn’t take any class labels into account. Imagine a situation where the variance is generated from external sources, let it be light. The axes with maximum variance do not necessarily contain any discriminative information at all, hence a classification becomes impossible. So a class-specific projection with a Linear Discriminant Analysis was applied to face recognition in [BHK97]. The basic idea is to minimize the variance within a class, while maximizing the variance between the classes at the same time.
@@ -19,7 +20,28 @@ O reconhecimento facial é extremamente complexo de implementar em uma máquina,
 \section*{abordagem escolhida}
 
 % http://docs.opencv.org/2.4/modules/contrib/doc/facerec/facerec_tutorial.html
-\lipsum[3]
+Hoje a biblioteca OpenCV oferece três algoritmos de reconhecimento facial disponíveis para uso sem custos monetário. Este trabalho visa apresentar o comparativo entre ao menos dois destes três algoritmos, apresentando tempo de execução e taxa de precisão de rostos.
+
+% https://github.com/bytefish/facerec
+\subsection*{Eigenfaces} % (fold)
+\label{sub:eigenfaces}
+
+% Turk, M., and Pentland, A. "Eigenfaces for recognition.". Journal of Cognitive Neuroscience 3 (1991), 71–86.
+The problem with the image representation we are given is its high dimensionality. Two-dimensional $p \times q$ grayscale images span a $m = pq$-dimensional vector space, so an image with $100 \times 100$ pixels lies in a 10,000-dimensional image space already. The question is: Are all dimensions equally useful for us? We can only make a decision if there’s any variance in data, so what we are looking for are the components that account for most of the information. The Principal Component Analysis (PCA) was independently proposed by Karl Pearson (1901) and Harold Hotelling (1933) to turn a set of possibly correlated variables into a smaller set of uncorrelated variables. The idea is, that a high-dimensional dataset is often described by correlated variables and therefore only a few meaningful dimensions account for most of the information. The PCA method finds the directions with the greatest variance in the data, called principal components.
+
+
+\subsection*{Fisherfaces} % (fold)
+\label{sub:fisherfaces}
+
+% Belhumeur, P. N., Hespanha, J., and Kriegman, D. "Eigenfaces vs. Fisherfaces: Recognition using class specific linear projection.". IEEE Transactions on Pattern Analysis and Machine Intelligence 19, 7 (1997), 711–720.
+The Linear Discriminant Analysis performs a class-specific dimensionality reduction and was invented by the great statistician Sir R. A. Fisher. He successfully used it for classifying flowers in his 1936 paper The use of multiple measurements in taxonomic problems \cite{fisher1936use}. In order to find the combination of features that separates best between classes the Linear Discriminant Analysis maximizes the ratio of between-classes to within-classes scatter, instead of maximizing the overall scatter. The idea is simple: same classes should cluster tightly together, while different classes are as far away as possible from each other in the lower-dimensional representation. This was also recognized by Belhumeur, Hespanha and Kriegman and so they applied a Discriminant Analysis to face recognition in \cite{fisherfaces}.
+% \citeonline{fisherfaces}.
+
+\subsection*{Local Binary Patterns Histograms} % (fold)
+\label{sub:local_binary_patterns_histograms}
+
+% Ahonen, T., Hadid, A., and Pietikainen, M. "Face Recognition with Local Binary Patterns.". Computer Vision - ECCV 2004 (2004), 469–481.
+The idea is to not look at the whole image as a high-dimensional vector, but describe only local features of an object. The features you extract this way will have a low-dimensionality implicitly. A fine idea! But you’ll soon observe the image representation we are given doesn’t only suffer from illumination variations. Think of things like scale, translation or rotation in images - your local description has to be at least a bit robust against those things. Just like {\ttfamily SIFT}, the Local Binary Patterns methodology has its roots in 2D texture analysis. The basic idea of Local Binary Patterns is to summarize the local structure in an image by comparing each pixel with its neighborhood. Take a pixel as center and threshold its neighbors against. If the intensity of the center pixel is greater-equal its neighbor, then denote it with 1 and 0 if not. You’ll end up with a binary number for each pixel, just like {\ttfamily 11001111}. So with 8 surrounding pixels you’ll end up with $2^8$ possible combinations, called Local Binary Patterns or sometimes referred to as LBP codes. The first LBP operator described in literature actually used a fixed $3 \times 3$ neighborhood.
 
 \section*{resultados e simulações}
 
