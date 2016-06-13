@@ -3,6 +3,7 @@
 
 # output_name= "$(notdir $(PWD)).pdf"
 output_name= "Trabalho Final.pdf"
+input_name = main
 
 all: clean optimize
 
@@ -12,27 +13,27 @@ history:
 do: *.tex
 	if test -f *.bib ;\
 	then \
-		pdflatex main;\
+		pdflatex $(input_name);\
 		echo -n "Buscando citações";\
 		grep -v "\%" conteudo/*.tex > search.temp;\
 		if grep '\\cite{'  search.temp -qn;\
 		then \
 			echo " ";\
 			echo -n "Montando bibliografias..." ;\
-			pdflatex main;\
-			pdflatex -interaction=batchmode main;\
-			bibtex main -terse;\
-			pdflatex -interaction=batchmode main;\
-			makeglossaries main;\
-			makeindex main.glo -s main.ist -t main.glg -o main.gls;\
-			pdflatex -interaction=batchmode main;\
-			pdflatex -interaction=batchmode main;\
+			pdflatex $(input_name);\
+			pdflatex -interaction=batchmode $(input_name);\
+			bibtex $(input_name) -terse;\
+			pdflatex -interaction=batchmode $(input_name);\
+			makeglossaries $(input_name);\
+			makeindex $(input_name).glo -s $(input_name).ist -t $(input_name).glg -o $(input_name).gls;\
+			pdflatex -interaction=batchmode $(input_name);\
+			pdflatex -interaction=batchmode $(input_name);\
 			echo "Feito.";\
 		else \
-			pdflatex main;\
-			makeglossaries main;\
-			makeindex main.glo -s main.ist -t main.glg -o main.gls;\
-			pdflatex main;\
+			pdflatex $(input_name);\
+			makeglossaries $(input_name);\
+			makeindex $(input_name).glo -s $(input_name).ist -t $(input_name).glg -o $(input_name).gls;\
+			pdflatex $(input_name);\
 			echo " ... Sem bibliografias";\
 		fi;\
 	else \
@@ -42,27 +43,27 @@ do: *.tex
 	@make clean
 
 # Compila a cada alteração de qualquer arquivo *.tex ou de qualquer *.vhd dentro da pasta 'src'
-main.pdf: conteudo/*.tex *.bib clean
+$(input_name).pdf: conteudo/*.tex *.bib clean
 	clear
-#	pdflatex -interaction errorstopmode -interaction=batchmode main.tex
-	pdflatex main.tex
+#	pdflatex -interaction errorstopmode -interaction=batchmode $(input_name).tex
+	pdflatex $(input_name).tex
 	clear
 	@echo "Compilado pela primeira vez...Feito."
 	make bib
 	@echo "Compilando pela segunda vez:"
-	@pdflatex -interaction=batchmode main.tex
+	@pdflatex -interaction=batchmode $(input_name).tex
 	@echo -n "Feito\nCompilando pela ultima vez:\n"
-	@pdflatex -interaction=batchmode main.tex
+	@pdflatex -interaction=batchmode $(input_name).tex
 	@echo -n "Limpando sujeira..."
 	@make clean
 	@echo "Feito."
 	
 optimize: do
 	clear
-	mv main.pdf $(output_name)
+	mv $(input_name).pdf $(output_name)
 	@echo "Informações do arquivo gerado:" $(notdir $(PWD)).pdf
 	pdfinfo $(output_name)
-	rm -rf main.pdf
+	rm -rf $(input_name).pdf
 	
 # Limpa qualquer sujeira que reste após compilação
 # Útil que objetos de linguagens são incluidos e ficam relatando erros após retirados.
@@ -73,8 +74,8 @@ buildclean:
 	rm -rf *.pdf
 	
 # Por algum motivo o *.pdf sumia da pasta. Gerado apenas para guardar uma copia de segurança na pasta
-backup: main.pdf
-	pdfopt main.pdf $(notdir $(PWD)).pdf
+backup: $(input_name).pdf
+	pdfopt $(input_name).pdf $(notdir $(PWD)).pdf
 
 bib: *.bib *.tex
 	if test -f *.bib ;\
@@ -85,7 +86,7 @@ bib: *.bib *.tex
 		then \
 			echo " ";\
 			echo -n "Montando bibliografias..." ;\
-			bibtex main;\
+			bibtex $(input_name);\
 			echo "Feito.";\
 		else \
 			echo " ... Nenhuma encontrada";\
