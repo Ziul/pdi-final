@@ -6,6 +6,7 @@ __pycache__/
 # C extensions
 *.so
 *.o
+*.a
 
 # Python extensions
 *.pyc
@@ -155,3 +156,9 @@ sympy-plots-for-*.tex/
 # xindy
 *.xdy
 conteudo/commit_log.tex
+
+#Binaries
+Eigenfaces/Eigenfaces
+
+#Images
+*.png
