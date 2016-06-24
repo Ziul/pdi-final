@@ -32,6 +32,49 @@ Hoje a biblioteca OpenCV oferece três algoritmos de reconhecimento facial dispo
 A grande quantidade de dimensões é o problema com as represetações de imagens. Imagens em $p \times q$ tons de cinza produzem um vetor $m = pq$-dimensional espacial, logo uma imagem com $100 \times 100$ pixels possui um vetor 10,000-dimensional espacial. A questão é: todas estas dimensões são úteis? Só é possível tomar uma decisão se houver uma variação nos dados, então é preciso encontrar os componentes que contém maior informação. A Análise de Componentes Principais (PCA, em inglês) foi proposta independentemente por Karl Pearson (1901) e Harold Hotelling (1933) para transformar um conjunto de possíveis variáveis correlacionadas em um conjunto menor de variáveis não correlacionadas. A ideia por trás disso é que um conjunto multidimensional de variáveis é frequentemente descrito por um conjunto de variáveis correlacionadas, logo apenas algumas dimensões são responsáveis pela maior parte das informações. O método PCA encontra as direções com maior variação de dados, chamados de componentes principais.
 %The problem with the image representation we are given is its high dimensionality. Two-dimensional $p \times q$ grayscale images span a $m = pq$-dimensional vector space, so an image with $100 \times 100$ pixels lies in a 10,000-dimensional image space already. The question is: Are all dimensions equally useful for us? We can only make a decision if there’s any variance in data, so what we are looking for are the components that account for most of the information. The Principal Component Analysis (PCA) was independently proposed by Karl Pearson (1901) and Harold Hotelling (1933) to turn a set of possibly correlated variables into a smaller set of uncorrelated variables. The idea is, that a high-dimensional dataset is often described by correlated variables and therefore only a few meaningful dimensions account for most of the information. The PCA method finds the directions with the greatest variance in the data, called principal components.
 
+\subsubsection*{Algoritmo} % (fold)
+\label{ssub:algoritmo}
+
+Sendo $X = \{ x_{1}, x_{2}, \ldots, x_{n} \}$ tal que $x_i \in R^{d}$.
+
+\begin{enumerate}
+    \item Calcule a média $\mu$.
+
+    \begin{equation*}
+        \mu = \frac{1}{n} \sum_{i=1}^{n} x_{i}
+    \end{equation*}
+    \item Calcule a matriz de covariância $S$.
+
+    \begin{equation*}
+        S = \frac{1}{n} \sum_{i=1}^{n} (x_{i} - \mu) (x_{i} - \mu)^{T}`
+    \end{equation*}
+
+    \item Calcule os autovalores $\lambda_{i}$ e autovetores $v_{i}$ de $S$.
+
+    \begin{equation*}
+        S v_{i} = \lambda_{i} v_{i}, i=1,2,\ldots,n
+    \end{equation*}
+
+    \item Os $k$ principais componentes são os autovetores correspondentes aos $k$ maiores autovalores, dados por:
+
+    \begin{equation*}
+        y = W^{T} (x - \mu)
+    \end{equation*}
+
+    Sendo $W = (v_{1}, v_{2}, \ldots, v_{k})$.
+
+    \item Sendo o PCA dado por: $x = W y + \mu$,
+    \begin{itemize}
+        \item Projeta-se todas as amostras de treinamento no subespaço PCA.
+        \item Projeta-se a imagem de analise no subespaço PCA.
+        \item Localize os vizinhos mais próximos entre as imagens de treinamento e a imagem de analise.
+    \end{itemize}
+\end{enumerate}
+
+Os autovetores resultantes são ortogonais. Para adquirir os autovetores ortonormais é necessário normaliza-los.
+
+% subsubsection algoritmo (end)
+
 \subsection*{Fisherfaces} % (fold)
 \label{sub:fisherfaces}
 
