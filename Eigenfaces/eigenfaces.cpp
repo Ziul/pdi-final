@@ -1,7 +1,4 @@
 /*
- * Copyright (c) 2011. Philipp Wagner <bytefish[at]gmx[dot]de>.
- * Released to public domain under terms of the BSD Simplified license.
- *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *   * Redistributions of source code must retain the above copyright
@@ -13,7 +10,6 @@
  *     may be used to endorse or promote products derived from this software
  *     without specific prior written permission.
  *
- *   See <http://www.opensource.org/licenses/bsd-license>
  */
 
 #include "opencv2/core/core.hpp"
