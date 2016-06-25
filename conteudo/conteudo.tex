@@ -32,8 +32,7 @@ Hoje a biblioteca OpenCV oferece três algoritmos de reconhecimento facial dispo
 A grande quantidade de dimensões é o problema com as represetações de imagens. Imagens em $p \times q$ tons de cinza produzem um vetor $m = pq$-dimensional espacial, logo uma imagem com $100 \times 100$ pixels possui um vetor 10,000-dimensional espacial. A questão é: todas estas dimensões são úteis? Só é possível tomar uma decisão se houver uma variação nos dados, então é preciso encontrar os componentes que contém maior informação. A Análise de Componentes Principais (PCA, em inglês) foi proposta independentemente por Karl Pearson (1901) e Harold Hotelling (1933) para transformar um conjunto de possíveis variáveis correlacionadas em um conjunto menor de variáveis não correlacionadas. A ideia por trás disso é que um conjunto multidimensional de variáveis é frequentemente descrito por um conjunto de variáveis correlacionadas, logo apenas algumas dimensões são responsáveis pela maior parte das informações. O método PCA encontra as direções com maior variação de dados, chamados de componentes principais.
 %The problem with the image representation we are given is its high dimensionality. Two-dimensional $p \times q$ grayscale images span a $m = pq$-dimensional vector space, so an image with $100 \times 100$ pixels lies in a 10,000-dimensional image space already. The question is: Are all dimensions equally useful for us? We can only make a decision if there’s any variance in data, so what we are looking for are the components that account for most of the information. The Principal Component Analysis (PCA) was independently proposed by Karl Pearson (1901) and Harold Hotelling (1933) to turn a set of possibly correlated variables into a smaller set of uncorrelated variables. The idea is, that a high-dimensional dataset is often described by correlated variables and therefore only a few meaningful dimensions account for most of the information. The PCA method finds the directions with the greatest variance in the data, called principal components.
 
-\subsubsection*{Algoritmo} % (fold)
-\label{ssub:algoritmo}
+\subsubsection*{Descrição do Algoritmo} % (fold)
 
 Sendo $X = \{ x_{1}, x_{2}, \ldots, x_{n} \}$ tal que $x_i \in R^{d}$.
 
@@ -82,6 +81,33 @@ Os autovetores resultantes são ortogonais. Para adquirir os autovetores ortonor
 A Análise Discriminante Linear (LDA, em inglês) executa uma redução dimensional específica de classe e foi inventada pelo renomado estatístico Sir R. A. Fisher. Ele utilzou com êxito esta análise para classificar flores em sua tese de 1936 ``The use of multiple measurements in taxonomic problems'' \cite{fisher1936use}. Para encontrar a combinação ótima de características que melhor separam as  classes a LDA maximiza a dispersão da razão entre-classes e inter-classes ao invés de maximizar a dispersão geral. A ideia é simples: as mesmas classes devem se agrupar fortemente juntas enquanto classes diferentes devem estar tão distantes quanto possível nas representação com poucas dimensões. Isto foi percebido também por Belhumeur, Hespanha e Kriegman e então eles aplicaram a análise discriminante para o reconhecimento de faces em \cite{fisherfaces}.
 %The Linear Discriminant Analysis performs a class-specific dimensionality reduction and was invented by the great statistician Sir R. A. Fisher. He successfully used it for classifying flowers in his 1936 paper The use of multiple measurements in taxonomic problems \cite{fisher1936use}. In order to find the combination of features that separates best between classes the Linear Discriminant Analysis maximizes the ratio of between-classes to within-classes scatter, instead of maximizing the overall scatter. The idea is simple: same classes should cluster tightly together, while different classes are as far away as possible from each other in the lower-dimensional representation. This was also recognized by Belhumeur, Hespanha and Kriegman and so they applied a Discriminant Analysis to face recognition in \cite{fisherfaces}.
 % \citeonline{fisherfaces}.
+
+\subsubsection*{Descrição do Algoritmo} % (fold)
+
+Sendo $X$ um conjunto de classes $X  = \{X_1,X_2,\ldots,X_c\}$ tal que  $X_i  = \{x_1, x_2, \ldots, x_n\}$ e suas matrizes de dispersão  $S_{B}$ e $S_{W}$ sendo dadas como:
+
+\begin{align*} 
+    S_{B} = & \sum_{i=1}^{c} N_{i} (\mu_i - \mu)(\mu_i - \mu)^{T} \\ 
+    S_{W} = & \sum_{i=1}^{c} \sum_{x_{j} \in X_{i}} (x_j - \mu_i)(x_j - \mu_i)^{T} 
+\end{align*}
+
+Sendo $\mu$ a média total e $\mu_i$ a média da classe $i \in \{1,\ldots,c\}$.
+
+O algoritmo de Fisher procura pela projeção $W$ que máximiza a separação de classes, dada por:
+
+\begin{equation*}
+W_{opt} = \operatorname{arg\,max}_{W} \frac{|W^T S_B W|}{|W^T S_W W|}
+\end{equation*}
+
+Segundo \cite{fisherfaces} a otimização para essa solução é data pela resolução do problema geral de autovalores:
+
+
+
+\begin{align*} 
+    S_{B} v_{i} = & \lambda_{i} S_w v_{i} \nonumber \\ 
+    S_{W}^{-1} S_{B} v_{i} = & \lambda_{i} v_{i} 
+\end{align*}
+
 
 \subsection*{Local Binary Patterns Histograms} % (fold)
 \label{sub:local_binary_patterns_histograms}
