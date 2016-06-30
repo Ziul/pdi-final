@@ -110,7 +110,7 @@ Segundo \cite{fisherfaces} a otimização para essa solução é data pela resol
 
 
 %\subsection*{Local Binary Patterns Histograms} % (fold)
-\label{sub:local_binary_patterns_histograms}
+% \label{sub:local_binary_patterns_histograms}
 
 % Ahonen, T., Hadid, A., and Pietikainen, M. "Face Recognition with Local Binary Patterns.". Computer Vision - ECCV 2004 (2004), 469–481.
 %A ideia não é olhar para toda uma figura como um vetor multidimensional, mas para descrever apenas características locais de um objeto. As características que são obtidas desta maneira vão possuir, implicitamente, menos dimensões. Uma ótima ideia,  porém será observado que a representação que é recebida não sofre apenas com a variação de iluminação. Outros problemas como variação de escala, rotação e translação em imagens - a descrição local deve ser robusta contra estes problemas. Assim como {\ttfamily SIFT}, a metodologia do Local Binary Pattern (LBP) se originou da análise de texturas 2D. A ideia básica do LBP é resumir a estrutura local de uma imagem comparando cada pixel com o seu vizinho. Definindo os pixels vizinhos a um central como limitantes é possível avaliar a intensidade entre eles, se o pixel central possuir intensidade maior ou igual aos vizinhos então este é designado como 1, caso o contrário o pixel central é designado como 0. Por fim restará uma representação binária para cada pixel, assim como {\ttfamily 11001111}. Com uma vizinhança de 8 pixels haverá $2^8$ possíveis combinações chamadas de Local Binarry Patterns, ou códigos LBP. O primeiro operador LBP descrito utilizava uma vizinhança $3 \times 3$ fixa.
