@@ -23,7 +23,7 @@ Recentemente diversos métodos para reconhecimento de características faciais s
 \section*{abordagem escolhida}
 
 % http://docs.opencv.org/2.4/modules/contrib/doc/facerec/facerec_tutorial.html
-Hoje a biblioteca OpenCV oferece três algoritmos de reconhecimento facial disponíveis para uso gratuito. 
+Hoje a biblioteca OpenCV oferece três algoritmos de reconhecimento facial disponíveis para uso gratuito. Neste trabalho serão analisadas duas delas, Eigenfaces e Fisherfaces.
 % https://github.com/bytefish/facerec
 \subsection*{Eigenfaces} % (fold)
 \label{sub:eigenfaces}
@@ -109,11 +109,11 @@ Segundo \cite{fisherfaces} a otimização para essa solução é data pela resol
 \end{align*}
 
 
-\subsection*{Local Binary Patterns Histograms} % (fold)
+%\subsection*{Local Binary Patterns Histograms} % (fold)
 \label{sub:local_binary_patterns_histograms}
 
 % Ahonen, T., Hadid, A., and Pietikainen, M. "Face Recognition with Local Binary Patterns.". Computer Vision - ECCV 2004 (2004), 469–481.
-A ideia não é olhar para toda uma figura como um vetor multidimensional, mas para descrever apenas características locais de um objeto. As características que são obtidas desta maneira vão possuir, implicitamente, menos dimensões. Uma ótima ideia,  porém será observado que a representação que é recebida não sofre apenas com a variação de iluminação. Outros problemas como variação de escala, rotação e translação em imagens - a descrição local deve ser robusta contra estes problemas. Assim como {\ttfamily SIFT}, a metodologia do Local Binary Pattern (LBP) se originou da análise de texturas 2D. A ideia básica do LBP é resumir a estrutura local de uma imagem comparando cada pixel com o seu vizinho. Definindo os pixels vizinhos a um central como limitantes é possível avaliar a intensidade entre eles, se o pixel central possuir intensidade maior ou igual aos vizinhos então este é designado como 1, caso o contrário o pixel central é designado como 0. Por fim restará uma representação binária para cada pixel, assim como {\ttfamily 11001111}. Com uma vizinhança de 8 pixels haverá $2^8$ possíveis combinações chamadas de Local Binarry Patterns, ou códigos LBP. O primeiro operador LBP descrito utilizava uma vizinhança $3 \times 3$ fixa.
+%A ideia não é olhar para toda uma figura como um vetor multidimensional, mas para descrever apenas características locais de um objeto. As características que são obtidas desta maneira vão possuir, implicitamente, menos dimensões. Uma ótima ideia,  porém será observado que a representação que é recebida não sofre apenas com a variação de iluminação. Outros problemas como variação de escala, rotação e translação em imagens - a descrição local deve ser robusta contra estes problemas. Assim como {\ttfamily SIFT}, a metodologia do Local Binary Pattern (LBP) se originou da análise de texturas 2D. A ideia básica do LBP é resumir a estrutura local de uma imagem comparando cada pixel com o seu vizinho. Definindo os pixels vizinhos a um central como limitantes é possível avaliar a intensidade entre eles, se o pixel central possuir intensidade maior ou igual aos vizinhos então este é designado como 1, caso o contrário o pixel central é designado como 0. Por fim restará uma representação binária para cada pixel, assim como {\ttfamily 11001111}. Com uma vizinhança de 8 pixels haverá $2^8$ possíveis combinações chamadas de Local Binarry Patterns, ou códigos LBP. O primeiro operador LBP descrito utilizava uma vizinhança $3 \times 3$ fixa.
 
  %The idea is to not look at the whole image as a high-dimensional vector, but describe only local features of an object. The features you extract this way will have a low-dimensionality implicitly. A fine idea! But you’ll soon observe the image representation we are given doesn’t only suffer from illumination variations. Think of things like scale, translation or rotation in images - your local description has to be at least a bit robust against those things. Just like {\ttfamily SIFT}, the Local Binary Patterns methodology has its roots in 2D texture analysis. The basic idea of Local Binary Patterns is to summarize the local structure in an image by comparing each pixel with its neighborhood. Take a pixel as center and threshold its neighbors against. If the intensity of the center pixel is greater-equal its neighbor, then denote it with 1 and 0 if not. You’ll end up with a binary number for each pixel, just like {\ttfamily 11001111}. So with 8 surrounding pixels you’ll end up with $2^8$ possible combinations, called Local Binary Patterns or sometimes referred to as LBP codes. The first LBP operator described in literature actually used a fixed $3 \times 3$ neighborhood.
 
@@ -152,7 +152,7 @@ f(x,y) \approx \begin{bmatrix}
 
 \section*{resultados e simulações}
 
-	Para realizar a análise do desempenho entre os algoritmos Eingenface e Fisherface sob variações de intensidade de luz e direção foi produzida uma base de dados com 330 imagens das faces de 5 pessoas (66 imagens para cada face) \cite{fisherfaces}. As imagens foram então divididas em subconjuntos nos quais o ângulo entre a câmera e a direção da luz varia em um intervalo pré determinado para cada subconjunto. No gráfico da \autoref{Grafico1} podemos ver os resultados a medida em que o ângulo entre a fonte de luz e o eixo de captura da câmera aumenta, indicado pelo aumento dos subconjuntos
+	Para realizar a análise do desempenho entre os algoritmos Eingenface e Fisherface sob variações de intensidade de luz e direção foi produzida uma base de dados com 330 imagens das faces de 5 pessoas (66 imagens para cada face) \cite{fisherfaces}. As imagens foram então divididas em subconjuntos nos quais o ângulo entre a câmera e a direção da luz varia em um intervalo pré determinado para cada subconjunto como na \autoref{Figura1}. No gráfico da \autoref{Grafico1} podemos ver os resultados a medida em que o ângulo entre a fonte de luz e o eixo de captura da câmera aumenta, indicado pelo aumento dos subconjuntos
 		
 %Gráfico 1 - Erro na identificação de faces por variação na iluminação
 % \end{multicols*}
@@ -192,12 +192,20 @@ f(x,y) \approx \begin{bmatrix}
     \caption{Saída do AT\$T facedatabase}
     \label{Figura2}
 \end{figure}
->>>>>>> d7048b770877e9bfe92998e380c77f14867f54a4
+
 
 \section*{conclusões e trabalhos futuros}
 
-O algoritmo de Eigenvectors possui alguns benefícios, como capturar a iluminação , porém  são necessárias uma grande quantidade de imagens para se alcançar um resultado considerável. Já o algoritmo de Fisherfaces consegue convergir para resultados palpáveis com menos imagens, porém seus resultados são muito sensíveis com a iluminação.
+	A robustez do algoritmo de Eigenfaces traz benefícios e problemas para sua aplicação. Para funcionar eficientemente o conjunto de treinamento para identificação de faces deve possuir uma grande base de dados e para isso requer uma capacidade computacional maior. Devido a sua sensibilidade a luz a base de dados deve conter amostras com variação de itensidade e direção de luz para identificar a face de forma correta. Contudo, a sua análise holística garante uma identificação mais segura da face de tal forma que para haver um reconhecimento utilizando Eigenfaces diversas características tem que corresponder, prevenindo assim falsos positivos. Isso garante com que o Eigenfaces seja um algoritmo melhor para aplicações de segurança nas quais a face de um indivíduo é uma chave de segurança.
 
-Por obter resultados em menos iterações, o algoritmo de Fisherfaces é interessante para propostas de localização de rostos ou olhos, como para substituição de características ou aplicação de mascaras como no aplicativo Snapchat. Porém, para aplicações no intuito de reconhecimento, como desbloqueio de tela ou controle de acesso presencial empresarial o Eigenvectors se mostra mais interessante, visto ser menos suscetível a falhas por questão de iluminação.
+%O algoritmo de Eigenfaces possui alguns benefícios, como capturar a iluminação , porém  são necessárias uma grande quantidade de imagens para se alcançar um resultado considerável. Já o algoritmo de Fisherfaces consegue convergir para resultados palpáveis com menos imagens, poré
+
+	O algoritmo de Fisherfaces, por outro lado, identifica uma face analisando suas características localmente, com isso diminuindo a quantidade de dados necessários para o seu treinamento. A sua aplicação é últil para reconhecimento de faces mesmo que elas sejam submetidas a diferentes indices de luminosidade e variações em suas expressões. O número de iterações é menor e seu banco de dados também, tornando o algoritmo de Fisherfaces interesante para aplicações de baixo poder computacional 
+
+%Por obter resultados em menos iterações, o algoritmo de Fisherfaces é interessante para propostas de localização de rostos ou olhos, como para substituição de características ou aplicação de mascaras como no aplicativo Snapchat. Porém, para aplicações no intuito de reconhecimento, como desbloqueio de tela ou controle de acesso presencial empresarial o Eigenvectors se mostra mais interessante, visto ser menos suscetível a falhas por questão de iluminação.
+
+	Além dos algoritmos analisados neste trabalho exitem outros dois algoritmos muito utilizado em aplicações que requerem baixo poder computacional. O primeiro é o método de Viola-Jones (ou Haar Cascades) para detecção de faces em uma imagem. O método de Viola-Jones é aplicado muitas vezes com Fisherfaces para o reconhecimento de faces em aplicativos como Facebook e Snapchat. O estudo do método de Viola-Jones é de interesse para trabalhos futuros pois seu uso pode gerar uma grande economia de tempo e processamento ao separar a face de uma imagem antes de executar a sua identificação. O segundo método é o Local Binary Patterns Histograms que faz uma análise do histograma de regiões da face e o compara aos histogramas de bancos de dados que contenham regiões correspondentes. Este método é robusto a variação de luminosidade e requer menos iterações que outros métodos.
+	
+	
 
 % \lipsum[5]
