@@ -152,7 +152,22 @@ f(x,y) \approx \begin{bmatrix}
 
 \section*{resultados e simulações}
 
-% \lipsum[4]
+	Para realizar a análise do desempenho entre os algoritmos Eingenface e Fisherface sob variações de intensidade de luz e direção foi produzida uma base de dados com 330 imagens das faces de 5 pessoas (66 imagens para cada face) [1]. As imagens foram então divididas em subconjuntos nos quais o ângulo entre a câmera e a direção da luz varia em um intervalo pré determinado para cada subconjunto. No gráfico (1) podemos ver os resultados a medida em que o ângulo entre a fonte de luz e o eixo de captura da câmera aumenta, indicado pelo aumento dos subconjuntos
+		
+%Gráfico 1 - Erro na identificação de faces por variação na iluminação
+
+	Foi possível observar algumas diferenças entre os os métodos. Para um treinamento contendo apenas imagens com iluminação frontal ambos os algoritmos obtiveram um bom desempenho contudo a medida em que o ângulo de incidência da luz aumenta em relação ao eixo da câmera é possível notar um aumento significativo na taxa de erro do Eingenface, enquanto o Fisherface se mostrou mais robusto e requisitou menos tempo computacional.
+	Essa discrepância entre os dois métodos acontece pois o Eingenface realiza uma análise holística da imagem (a face é analisada como um todo) e as distâncias entre pontos e os ângulos formados entre eles são registradas [2]. Como este método é aplicado em imagens em tons de cinza, a alteração na iluminação afeta a identificação dos pontos equivalentes em duas imagens com a mesma face.
+		
+% Figura 1
+	
+	Ao executar o algoritmo para Eigenface, no AT&T Facedatabase, e aplicar uma transformação de pixels nas imagens em tons de cinza também é possível notar a sensibilidade a luminosidade e perceber que além das características faciais a luminosidade também é codificada. As regiões vermelhas na figura 2 indicam a região mais iluminada nas faces. Logo podemos concluir que o treinamento para o uso de Eingenface deve conter faces com diferentes pontos de iluminação.
+
+
+%Figura 2 - At&t facedatabase output
+				
+	Utilizado ainda o mesmo conjunto de treinamento  para análise de faces com mudanças nas expressões faciais o algoritmo para Eigenface apresentou uma taxa maior de erro comparado ao Fisherface. Como na variação de luminosidade, a variação na expressão facial aparece para o algoritmo de Eigenface como uma nova face enquanto o algoritmo de Fisherface as regiões afetadas pela expressão facial são ignoradas e outros pontos da face são identificados no conjunto de treinamento.
+	
 
 \section*{conclusões e trabalhos futuros}
 
